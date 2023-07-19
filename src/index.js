@@ -29,17 +29,26 @@ const getTreeObject = (obj1, obj2) => {
 const proccesDiff = (object) => {
   const resultDif = object.map((key) => {
     let result = '';
-    if (key.state === 'unchanged') {
-      result += `    ${key.name}: ${key.value}\n`;
-    } else if (key.state === 'deleted') {
-      result += `  - ${key.name}: ${key.value}\n`;
-    } else if (key.state === 'added') {
-      result += `  + ${key.name}: ${key.value}\n`;
-    } else if (key.state === 'changed') {
-      result += `  - ${key.name}: ${key.value.oldValue}\n  + ${key.name}: ${key.value.newValue}\n`;
+
+    switch (key.state) {
+      case 'unchanged':
+        result += `    ${key.name}: ${key.value}\n`;
+        break;
+      case 'deleted':
+        result += `  - ${key.name}: ${key.value}\n`;
+        break;
+      case 'added':
+        result += `  + ${key.name}: ${key.value}\n`;
+        break;
+      case 'changed':
+        result += `  - ${key.name}: ${key.value.oldValue}\n  + ${key.name}: ${key.value.newValue}\n`;
+        break;
+      default: break;
     }
+
     return result;
   });
+
   return `\n{ \n${resultDif.join('')}}\n`;
 };
 
