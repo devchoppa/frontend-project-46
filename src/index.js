@@ -1,56 +1,6 @@
-import path from 'path';
-import fs from 'fs';
-import _ from 'lodash';
-
-const getPath = (filepath) => {
-  const procces = process.cwd();
-  return path.resolve(procces, filepath);
-};
-
-const readFile = (filepath) => {
-  const pathFile = getPath(filepath);
-  return fs.readFileSync(pathFile, 'utf-8');
-};
-
-const getTreeObject = (obj1, obj2) => {
-  const keysSorted = _.sortBy(Object.keys({ ...obj1, ...obj2 }));
-
-  const treeObject = keysSorted.map((key) => {
-    if (!_.has(obj1, key)) return { state: 'added', name: key, value: obj2[key] };
-    if (!_.has(obj2, key)) return { state: 'deleted', name: key, value: obj1[key] };
-    if (obj1[key] !== obj2[key]) {
-      return { state: 'changed', name: key, value: { oldValue: obj1[key], newValue: obj2[key] } };
-    }
-    return { state: 'unchanged', name: key, value: obj2[key] };
-  });
-  return treeObject;
-};
-
-const proccesDiff = (object) => {
-  const resultDif = object.map((key) => {
-    let result = '';
-
-    switch (key.state) {
-      case 'unchanged':
-        result += `    ${key.name}: ${key.value}\n`;
-        break;
-      case 'deleted':
-        result += `  - ${key.name}: ${key.value}\n`;
-        break;
-      case 'added':
-        result += `  + ${key.name}: ${key.value}\n`;
-        break;
-      case 'changed':
-        result += `  - ${key.name}: ${key.value.oldValue}\n  + ${key.name}: ${key.value.newValue}\n`;
-        break;
-      default: break;
-    }
-
-    return result;
-  });
-
-  return `\n{ \n${resultDif.join('')}}\n`;
-};
+import readFile from './readFile.js';
+import getTreeObject from './filesDiff.js';
+import proccesDiff from './createDiff.js';
 
 const gendiff = (filepath1, filepath2) => {
   const obj1 = JSON.parse(readFile(filepath1));
