@@ -27,8 +27,8 @@ const getTreeObject = (obj1, obj2) => {
 };
 
 const proccesDiff = (object) => {
-  let resultDiff = object.reduce((str, key) => {
-    let result = str;
+  const resultDif = object.map((key) => {
+    let result = '';
     if (key.state === 'unchanged') {
       result += `    ${key.name}: ${key.value}\n`;
     } else if (key.state === 'deleted') {
@@ -39,19 +39,17 @@ const proccesDiff = (object) => {
       result += `  - ${key.name}: ${key.value.oldValue}\n  + ${key.name}: ${key.value.newValue}\n`;
     }
     return result;
-  }, '{\n');
-
-  resultDiff += '}';
-  return resultDiff;
+  });
+  return `\n{ \n${resultDif.join('')}}\n`;
 };
 
 const gendiff = (filepath1, filepath2) => {
   const obj1 = JSON.parse(readFile(filepath1));
   const obj2 = JSON.parse(readFile(filepath2));
   const treeObject = getTreeObject(obj1, obj2);
-  const resultDiff = proccesDiff(treeObject);
+  const diff = proccesDiff(treeObject);
 
-  return resultDiff;
+  return diff;
 };
 
 export default gendiff;
