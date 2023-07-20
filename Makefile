@@ -1,3 +1,6 @@
+install: install-deps
+	npx simple-git-hooks
+
 install-deps: 
 	npm ci
 
@@ -15,3 +18,6 @@ lint:
 	
 fix-all: 
 	npx eslint --fix .
+
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
