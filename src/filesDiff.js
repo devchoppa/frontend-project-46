@@ -14,4 +14,30 @@ const getTreeObject = (obj1, obj2) => {
   return treeObject;
 };
 
-export default getTreeObject;
+const proccesDiff = (object) => {
+  const resultDif = object.map((key) => {
+    let result = '';
+
+    switch (key.state) {
+      case 'unchanged':
+        result += `    ${key.name}: ${key.value}`;
+        break;
+      case 'deleted':
+        result += `  - ${key.name}: ${key.value}`;
+        break;
+      case 'added':
+        result += `  + ${key.name}: ${key.value}`;
+        break;
+      case 'changed':
+        result += `  - ${key.name}: ${key.value.oldValue}\n  + ${key.name}: ${key.value.newValue}`;
+        break;
+      default: break;
+    }
+
+    return result;
+  });
+
+  return `{\n${resultDif.join('\n')}\n}`;
+};
+
+export { getTreeObject, proccesDiff };
