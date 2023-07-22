@@ -20,3 +20,39 @@ test('test2 yaml', () => {
   const expectedFile = 'expected1.txt';
   expect(fileDiff).toEqual(readContent(expectedFile));
 });
+
+test('test3 stylish', () => {
+  const fileDiff = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'stylish');
+  const expectedFile = 'expected1.txt';
+  expect(fileDiff).toEqual(readContent(expectedFile));
+});
+
+test('test4 stylish', () => {
+  const fileDiff = gendiff('./__fixtures__/filepath1.yml', './__fixtures__/filepath2.yml', 'stylish');
+  const expectedFile = 'expected1.txt';
+  expect(fileDiff).toEqual(readContent(expectedFile));
+});
+
+test('test5 plain', () => {
+  const fileDiff = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'plain');
+  const expectedFile = 'expected2.txt';
+  expect(fileDiff).toEqual(readContent(expectedFile));
+});
+
+test('test6 plain', () => {
+  const fileDiff = gendiff('./__fixtures__/filepath1.yml', './__fixtures__/filepath2.yml', 'plain');
+  const expectedFile = 'expected2.txt';
+  expect(fileDiff).toEqual(readContent(expectedFile));
+});
+
+test('test7 json', () => {
+  const fileDiff = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'json');
+  const expectedFile = 'expected3.txt';
+  expect(fileDiff).toEqual(readContent(expectedFile));
+});
+
+test('test8 json', () => {
+  const fileDiff = gendiff('./__fixtures__/filepath1.yml', './__fixtures__/filepath2.yml', 'json');
+  const expectedFile = 'expected3.txt';
+  expect(fileDiff).toEqual(readContent(expectedFile));
+});
