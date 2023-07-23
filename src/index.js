@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import buildTree from './filesDiff.js';
+import buildTree from './filediff.js';
 import selectFormat from './formatters/index.js';
-import parse from './parsers.js';
+import parse from './parser.js';
 
 const getAbsPath = (filepath) => path.resolve(process.cwd(), filepath.trim());
 const readFile = (filepath) => fs.readFileSync(getAbsPath(filepath), 'utf-8');
