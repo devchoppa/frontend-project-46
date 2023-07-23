@@ -4,7 +4,7 @@ import buildTree from './filediff.js';
 import selectFormat from './formatters/index.js';
 import parse from './parser.js';
 
-const getAbsPath = (filepath) => path.resolve(process.cwd(), filepath.trim());
+const getAbsPath = (filepath) => path.resolve(process.cwd(), filepath);
 const readFile = (filepath) => fs.readFileSync(getAbsPath(filepath), 'utf-8');
 const getFormat = (filepath) => path.extname(filepath).slice(1);
 
