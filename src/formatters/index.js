@@ -2,14 +2,14 @@ import stylishFormat from './stylish.js';
 import plainFormat from './plain.js';
 import jsonFormat from './json.js';
 
-const selectFormat = (resultTree, format) => {
+const selectFormat = (tree, format) => {
   switch (format) {
     case 'stylish':
-      return stylishFormat(resultTree);
+      return stylishFormat(tree);
     case 'plain':
-      return plainFormat(resultTree);
+      return plainFormat(tree);
     case 'json':
-      return jsonFormat(resultTree);
+      return jsonFormat(tree);
     default: throw new Error(`Unknown format:${format}`);
   }
 };
