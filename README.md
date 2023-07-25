@@ -7,6 +7,10 @@
 ### Test Coverage Badge:
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1f9d79c928780bc67fe6/test_coverage)](https://codeclimate.com/github/devchoppa/frontend-project-46/test_coverage)
 
+### Требования
+
+<img src="https://img.shields.io/badge/node-%3E%3D13.14.0-brightgreen"/> <img src="https://img.shields.io/badge/npm-%3E%3D6.14.4-blue"/>
+
 ## Описание
 Консольное приложение для вычисления структурных диффов файлов в форматах JSON и YAML.
 
