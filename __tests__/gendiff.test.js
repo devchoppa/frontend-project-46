@@ -18,6 +18,7 @@ describe('gendiff', () => {
   test.each(testFormats)('%s', (format) => {
     const filepath1 = getFixturePath(`filepath1.${format}`);
     const filepath2 = getFixturePath(`filepath2.${format}`);
+    expect(gendiff(filepath1, filepath2)).toEqual(expectedStylish);
     expect(gendiff(filepath1, filepath2, 'stylish')).toEqual(expectedStylish);
     expect(gendiff(filepath1, filepath2, 'plain')).toEqual(expectedPlain);
     expect(gendiff(filepath1, filepath2, 'json')).toEqual(expectedJson);
