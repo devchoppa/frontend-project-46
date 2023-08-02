@@ -1,108 +1,100 @@
 [
   {
-    "state": "nodes",
-    "name": "common",
+    "type": "nodes",
+    "key": "common",
     "children": [
       {
-        "state": "added",
-        "name": "follow",
-        "value": false
+        "type": "added",
+        "key": "follow",
+        "value2": false
       },
       {
-        "state": "unchanged",
-        "name": "setting1",
-        "value": "Value 1"
+        "type": "unchanged",
+        "key": "setting1",
+        "value2": "Value 1"
       },
       {
-        "state": "deleted",
-        "name": "setting2",
-        "value": 200
+        "type": "deleted",
+        "key": "setting2",
+        "value1": 200
       },
       {
-        "state": "changed",
-        "name": "setting3",
-        "value": {
-          "oldValue": true,
-          "newValue": null
-        }
+        "type": "changed",
+        "key": "setting3",
+        "value1": true,
+        "value2": null
       },
       {
-        "state": "added",
-        "name": "setting4",
-        "value": "blah blah"
+        "type": "added",
+        "key": "setting4",
+        "value2": "blah blah"
       },
       {
-        "state": "added",
-        "name": "setting5",
-        "value": {
+        "type": "added",
+        "key": "setting5",
+        "value2": {
           "key5": "value5"
         }
       },
       {
-        "state": "nodes",
-        "name": "setting6",
+        "type": "nodes",
+        "key": "setting6",
         "children": [
           {
-            "state": "nodes",
-            "name": "doge",
+            "type": "nodes",
+            "key": "doge",
             "children": [
               {
-                "state": "changed",
-                "name": "wow",
-                "value": {
-                  "oldValue": "",
-                  "newValue": "so much"
-                }
+                "type": "changed",
+                "key": "wow",
+                "value1": "",
+                "value2": "so much"
               }
             ]
           },
           {
-            "state": "unchanged",
-            "name": "key",
-            "value": "value"
+            "type": "unchanged",
+            "key": "key",
+            "value2": "value"
           },
           {
-            "state": "added",
-            "name": "ops",
-            "value": "vops"
+            "type": "added",
+            "key": "ops",
+            "value2": "vops"
           }
         ]
       }
     ]
   },
   {
-    "state": "nodes",
-    "name": "group1",
+    "type": "nodes",
+    "key": "group1",
     "children": [
       {
-        "state": "changed",
-        "name": "baz",
-        "value": {
-          "oldValue": "bas",
-          "newValue": "bars"
-        }
+        "type": "changed",
+        "key": "baz",
+        "value1": "bas",
+        "value2": "bars"
       },
       {
-        "state": "unchanged",
-        "name": "foo",
-        "value": "bar"
+        "type": "unchanged",
+        "key": "foo",
+        "value2": "bar"
       },
       {
-        "state": "changed",
-        "name": "nest",
-        "value": {
-          "oldValue": {
-            "key": "value"
-          },
-          "newValue": "str"
-        }
+        "type": "changed",
+        "key": "nest",
+        "value1": {
+          "key": "value"
+        },
+        "value2": "str"
       }
     ]
   },
   {
-    "state": "deleted",
-    "name": "group2",
-    "value": {
+    "type": "deleted",
+    "key": "group2",
+    "value1": {
       "abc": 12345,
       "deep": {
         "id": 45
@@ -110,9 +102,9 @@
     }
   },
   {
-    "state": "added",
-    "name": "group3",
-    "value": {
+    "type": "added",
+    "key": "group3",
+    "value2": {
       "deep": {
         "id": {
           "number": 45
