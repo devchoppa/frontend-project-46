@@ -8,22 +8,22 @@ const stringify = (value) => {
 };
 
 const plainFormat = (mainTree) => {
-  const iter = (tree, name = '') => {
+  const iter = (tree, key = '') => {
     const result = tree.flatMap((node) => {
-      const keys = [...name, node.name];
-      switch (node.state) {
+      const keys = [...key, node.key];
+      switch (node.type) {
         case 'added':
-          return `Property '${keys.join('.')}' was added with value: ${stringify(node.value)}`;
+          return `Property '${keys.join('.')}' was added with value: ${stringify(node.value2)}`;
         case 'deleted':
           return `Property '${keys.join('.')}' was removed`;
         case 'unchanged':
           return null;
         case 'changed':
-          return `Property '${keys.join('.')}' was updated. From ${stringify(node.value.oldValue)} to ${stringify(node.value.newValue)}`;
+          return `Property '${keys.join('.')}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
         case 'nodes':
           return iter(node.children, keys);
         default:
-          throw new Error(`This type does not exist: ${node.state}`);
+          throw new Error(`This type does not exist: ${node.type}`);
       }
     });
     return result.filter((item) => item !== null).join('\n');
