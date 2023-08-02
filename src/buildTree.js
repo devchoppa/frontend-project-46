@@ -1,16 +1,38 @@
 import _ from 'lodash';
 
-const buildTree = (obj1, obj2) => {
-  const sortedKeys = _.sortBy(Object.keys({ ...obj1, ...obj2 }));
+const buildTree = (data1, data2) => {
+  const sortedKeys = _.sortBy(Object.keys({ ...data1, ...data2 }));
   return sortedKeys.map((key) => {
-    if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) return { state: 'nodes', name: key, children: buildTree(obj1[key], obj2[key]) };
-    if (!_.has(obj1, key)) return { state: 'added', name: key, value: obj2[key] };
-    if (!_.has(obj2, key)) return { state: 'deleted', name: key, value: obj1[key] };
-    if (obj1[key] !== obj2[key]) {
-      return { state: 'changed', name: key, value: { oldValue: obj1[key], newValue: obj2[key] } };
+    if (!_.has(data1, key)) {
+      return {
+        type: 'added',
+        key,
+        value2: data2[key],
+      };
     }
-    return { state: 'unchanged', name: key, value: obj2[key] };
+    if (!_.has(data2, key)) {
+      return {
+        type: 'deleted',
+        key,
+        value1: data1[key],
+      };
+    }
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
+      return {
+        type: 'nodes',
+        key,
+        children: buildTree(data1[key], data2[key]),
+      };
+    }
+    if (data1[key] !== data2[key]) {
+      return {
+        type: 'changed',
+        key,
+        value1: data1[key],
+        value2: data2[key],
+      };
+    }
+    return { type: 'unchanged', key, value2: data2[key] };
   });
 };
-
 export default buildTree;
