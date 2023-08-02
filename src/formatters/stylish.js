@@ -13,20 +13,20 @@ const stringify = (value, depth) => {
 
 const stylishFormat = (mainTree) => {
   const iter = (tree, depth) => tree.map((node) => {
-    const createString = (value, sign) => `${indent(depth)}${sign} ${node.name}: ${stringify(value, depth)}\n`;
-    switch (node.state) {
+    const createString = (value, sign) => `${indent(depth)}${sign} ${node.key}: ${stringify(value, depth)}\n`;
+    switch (node.type) {
       case 'added':
-        return createString(node.value, '+');
+        return createString(node.value2, '+');
       case 'deleted':
-        return createString(node.value, '-');
+        return createString(node.value1, '-');
       case 'unchanged':
-        return createString(node.value, ' ');
+        return createString(node.value2, ' ');
       case 'changed':
-        return `${createString(node.value.oldValue, '-')}${createString(node.value.newValue, '+')}`;
+        return `${createString(node.value1, '-')}${createString(node.value2, '+')}`;
       case 'nodes':
-        return `${indent(depth)}  ${node.name}: {\n${iter(node.children, depth + 1).join('')}${indent(depth)}  }\n`;
+        return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 1).join('')}${indent(depth)}  }\n`;
       default:
-        throw new Error(`This type does not exist: ${node.state}`);
+        throw new Error(`This type does not exist: ${node.type}`);
     }
   });
   return `{\n${iter(mainTree, 1).join('')}}`;
