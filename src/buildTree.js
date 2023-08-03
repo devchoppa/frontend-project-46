@@ -24,7 +24,7 @@ const buildTree = (data1, data2) => {
         children: buildTree(data1[key], data2[key]),
       };
     }
-    if (data1[key] !== data2[key]) {
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
         type: 'changed',
         key,
