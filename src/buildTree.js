@@ -14,7 +14,7 @@ const buildTree = (data1, data2) => {
       return {
         type: 'deleted',
         key,
-        value1: data1[key],
+        value: data1[key],
       };
     }
     if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
