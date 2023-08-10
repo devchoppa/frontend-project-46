@@ -4,31 +4,32 @@ const stringify = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
   }
-  return typeof value === 'string' ? `'${value}'` : value;
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
+  return value;
+};
+const iter = (tree, keys = []) => {
+  const result = tree.map((node) => {
+    const keysArr = [...keys, node.key];
+    switch (node.type) {
+      case 'added':
+        return `Property '${keysArr.join('.')}' was added with value: ${stringify(node.value2)}`;
+      case 'deleted':
+        return `Property '${keysArr.join('.')}' was removed`;
+      case 'unchanged':
+        return null;
+      case 'changed':
+        return `Property '${keysArr.join('.')}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
+      case 'nodes':
+        return iter(node.children, keysArr);
+      default:
+        throw new Error(`This type does not exist: ${node.type}`);
+    }
+  });
+  return result.filter(Boolean).join('\n');
 };
 
-const plainFormat = (mainTree) => {
-  const iter = (tree, key = '') => {
-    const result = tree.flatMap((node) => {
-      const keys = [...key, node.key];
-      switch (node.type) {
-        case 'added':
-          return `Property '${keys.join('.')}' was added with value: ${stringify(node.value2)}`;
-        case 'deleted':
-          return `Property '${keys.join('.')}' was removed`;
-        case 'unchanged':
-          return null;
-        case 'changed':
-          return `Property '${keys.join('.')}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
-        case 'nodes':
-          return iter(node.children, keys);
-        default:
-          throw new Error(`This type does not exist: ${node.type}`);
-      }
-    });
-    return result.filter((item) => item !== null).join('\n');
-  };
-  return iter(mainTree, []);
-};
+const getFormatPlain = (tree) => iter(tree, []);
 
-export default plainFormat;
+export default getFormatPlain;
