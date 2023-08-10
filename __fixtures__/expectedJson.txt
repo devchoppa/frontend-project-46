@@ -16,7 +16,7 @@
       {
         "type": "deleted",
         "key": "setting2",
-        "value1": 200
+        "value": 200
       },
       {
         "type": "changed",
@@ -94,7 +94,7 @@
   {
     "type": "deleted",
     "key": "group2",
-    "value1": {
+    "value": {
       "abc": 12345,
       "deep": {
         "id": 45
