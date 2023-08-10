@@ -1,15 +1,14 @@
-import stylishFormat from './stylish.js';
-import plainFormat from './plain.js';
-import jsonFormat from './json.js';
+import getFormatPlain from './plain.js';
+import getFormatStylish from './stylish.js';
 
 const format = (tree, outputFormat) => {
   switch (outputFormat) {
     case 'stylish':
-      return stylishFormat(tree);
+      return getFormatStylish(tree);
     case 'plain':
-      return plainFormat(tree);
+      return getFormatPlain(tree);
     case 'json':
-      return jsonFormat(tree);
+      return JSON.stringify(tree, null, 2);
     default: throw new Error(`Unknown format:${outputFormat}`);
   }
 };
