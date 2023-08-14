@@ -1,17 +1,17 @@
 import _ from 'lodash';
 
-const countMargins = 4;
+const spacesCount = 4;
 const offsetLeft = 2;
 
-const indent = (depth) => ' '.repeat((depth * countMargins) - offsetLeft);
+const indent = (depth) => ' '.repeat((depth * spacesCount) - offsetLeft);
 
 const stringify = (value, depth) => {
   if (!_.isObject(value)) {
-    return value;
+    return `${value}`;
   }
   const keys = Object.keys(value);
-  const getOutput = keys.map((key) => `${indent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`);
-  return `{\n${getOutput.join('\n')}\n  ${indent(depth)}}`;
+  const output = keys.map((key) => `${indent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`);
+  return `{\n${output.join('\n')}\n  ${indent(depth)}}`;
 };
 const iter = (tree, depth) => tree.map((node) => {
   const createString = (value, sign) => `${indent(depth)}${sign} ${node.key}: ${stringify(value, depth)}\n`;
@@ -21,7 +21,7 @@ const iter = (tree, depth) => tree.map((node) => {
     case 'deleted':
       return createString(node.value, '-');
     case 'unchanged':
-      return createString(node.value2, ' ');
+      return createString(node.value, ' ');
     case 'changed':
       return `${createString(node.value1, '-')}${createString(node.value2, '+')}`;
     case 'nodes':
