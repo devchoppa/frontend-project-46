@@ -32,7 +32,7 @@ const buildTree = (data1, data2) => {
         value2: data2[key],
       };
     }
-    return { type: 'unchanged', key, value2: data2[key] };
+    return { type: 'unchanged', key, value: data2[key] };
   });
 };
 export default buildTree;
