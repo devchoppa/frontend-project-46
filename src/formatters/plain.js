@@ -9,20 +9,21 @@ const stringify = (value) => {
   }
   return value;
 };
-const iter = (tree, keys = []) => {
+const iter = (tree, key = []) => {
   const result = tree.map((node) => {
-    const keysArr = [...keys, node.key];
+    const keys = [...key, `${node.key}`];
+    const pathName = keys.join('.');
     switch (node.type) {
       case 'added':
-        return `Property '${keysArr.join('.')}' was added with value: ${stringify(node.value2)}`;
+        return `Property '${pathName}' was added with value: ${stringify(node.value2)}`;
       case 'deleted':
-        return `Property '${keysArr.join('.')}' was removed`;
+        return `Property '${pathName}' was removed`;
       case 'unchanged':
         return null;
       case 'changed':
-        return `Property '${keysArr.join('.')}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
+        return `Property '${pathName}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
       case 'nodes':
-        return iter(node.children, keysArr);
+        return iter(node.children, [pathName]);
       default:
         throw new Error(`This type does not exist: ${node.type}`);
     }
