@@ -11,7 +11,7 @@
       {
         "type": "unchanged",
         "key": "setting1",
-        "value2": "Value 1"
+        "value": "Value 1"
       },
       {
         "type": "deleted",
@@ -55,7 +55,7 @@
           {
             "type": "unchanged",
             "key": "key",
-            "value2": "value"
+            "value": "value"
           },
           {
             "type": "added",
@@ -79,7 +79,7 @@
       {
         "type": "unchanged",
         "key": "foo",
-        "value2": "bar"
+        "value": "bar"
       },
       {
         "type": "changed",
